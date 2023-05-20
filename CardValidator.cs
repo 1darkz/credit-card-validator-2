@@ -1,8 +1,4 @@
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace CreditCard
 {
@@ -10,60 +6,65 @@ namespace CreditCard
     {
         static void Main(string[] args)
         {
-            string cardNumber;
+            string creditCardNumber;
             Console.WriteLine("Enter a credit card number: ");
-            cardNumber = Console.ReadLine();
-            Console.WriteLine("You entered: " + cardNumber);
-            if (cardNumber.Length != 16)
+            creditCardNumber = Console.ReadLine();
+            Console.WriteLine($"You entered: {creditCardNumber}");
+
+            if (creditCardNumber.Length != 16)
             {
-                Console.WriteLine("Invalid card number");
-                Console.ReadLine();
-                return;
+                DisplayInvalidCardNumber();
+                return; 
             }
-            for (int i = 0; i < cardNumber.Length; i++)
+
+            for (int i = 0; i < creditCardNumber.Length; i++)
             {
-                if (!char.IsDigit(cardNumber[i]))
+                if (!char.IsDigit(creditCardNumber[i]))
                 {
-                    Console.WriteLine("Invalid card number");
-                    Console.ReadLine();
+                    DisplayInvalidCardNumber();
                     return;
                 }
             }
-            CardChecker(cardNumber);
+
+            CardChecker(creditCardNumber);
         }
 
-        private static void CardChecker(string cardNumber)
+        private static void DisplayInvalidCardNumber()
         {
-            if (cardNumber[0] == '4')
+            Console.WriteLine("Invalid card number");
+            Console.ReadLine();
+        }
+
+        private static void CardChecker(string creditCardNumber)
+        {
+            char firstDigit = creditCardNumber[0];
+
+            if (firstDigit == '4')
             {
                 Console.WriteLine("Visa card");
-                Console.ReadLine();
             }
-            else if (cardNumber[0] == '5')
+            else if (firstDigit == '5')
             {
                 Console.WriteLine("Mastercard");
-                Console.ReadLine();
             }
-            else if (cardNumber[0] == '2')
+            else if (firstDigit == '2')
             {
                 Console.WriteLine("Mastercard (digital)");
-                Console.ReadLine();
             }
-            else if (cardNumber[0] == '3')
+            else if (firstDigit == '3')
             {
                 Console.WriteLine("American Express");
-                Console.ReadLine();
             }
-            else if (cardNumber[0] == '6')
+            else if (firstDigit == '6')
             {
                 Console.WriteLine("Discover");
-                Console.ReadLine();
             }
             else
             {
                 Console.WriteLine("Unknown card");
-                Console.ReadLine();
             }
+
+            Console.ReadLine();
         }
     }
 }
